@@ -2,5 +2,5 @@
 <resources>
     <color name="navBarDark">#202020</color>
     <color name="navBarLight">#F5F5F5</color>
-    <color name="navBarBlack">#121212</color>
+    <color name="navBarBlack">#0d0d0d</color>
 </resources>

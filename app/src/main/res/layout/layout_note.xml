@@ -9,7 +9,7 @@
         app:checkedIcon="@null"
         app:cardBackgroundColor="?attr/colorNoteDefault"
         app:strokeWidth="0dp"
-        app:strokeColor="?attr/colorNoteDefault"
+        app:strokeColor="@color/state_selected_note"
         app:cardElevation="0dp"
         app:cardCornerRadius="20dp">
 
