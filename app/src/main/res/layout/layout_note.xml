@@ -8,10 +8,10 @@
         android:checkable="true"
         app:checkedIcon="@null"
         app:cardBackgroundColor="?attr/colorNoteDefault"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/state_selected_note"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="6dp">
+        app:strokeWidth="0dp"
+        app:strokeColor="?attr/colorNoteDefault"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="20dp">
 
     <LinearLayout
             android:id="@+id/linear_layout"
