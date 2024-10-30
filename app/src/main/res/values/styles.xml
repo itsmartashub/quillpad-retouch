@@ -2,7 +2,7 @@
     <!-- General -->
     <style name="Widget.Custom.NavigationView" parent="Widget.Design.NavigationView">
         <item name="itemTextColor">?attr/colorDrawerItemTextSelected</item>
-        <item name="itemIconTint">?attr/colorDrawerItemIconSelected</item>
+        <item name="itemIconTint">?attr/colorPrimary</item>
         <item name="itemBackground">?attr/drawableDrawerItemBackground</item>
         <item name="itemTextAppearance">@style/TextAppearance.Custom.DrawerItem</item>
         <item name="android:background">?attr/colorDrawerBackground</item>
@@ -20,6 +20,7 @@
 
     <style name="Widget.Custom.BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar">
         <item name="backgroundTint">?attr/colorBottomAppBarBackground</item>
+        <item name="itemIconTint">?attr/colorPrimary</item>
     </style>
 
     <style name="TextAppearance.Custom.DrawerItem" parent="android:Widget.TextView">
@@ -121,6 +122,7 @@
         <item name="android:drawablePadding">16dp</item>
         <item name="android:padding">12dp</item>
         <item name="android:gravity">center|start</item>
+        <item name="android:drawableTint">?attr/colorPrimary</item> <!-- Set the icon color -->
     </style>
 </resources>
 
