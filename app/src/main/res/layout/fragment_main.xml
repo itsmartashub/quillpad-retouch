@@ -74,7 +74,8 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.Custom.BottomAppBar"
                 app:menu="@menu/main_bottom"
-                app:fabAlignmentMode="end"/>
+                app:fabAlignmentMode="end"
+                app:elevation="0dp" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
