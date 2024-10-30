@@ -143,7 +143,7 @@
     <string name="no">No</string>
     <string name="ok">Okay</string>
     <string name="indicator_notes_empty">Your notes will appear here.</string>
-    <string name="indicator_untitled">Untitled</string>
+    <string name="indicator_untitled">🚧</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="action_save">Save</string>
@@ -257,7 +257,7 @@
     <string name="action_insert_quote">Insert quotation markdown</string>
     <string name="action_insert_code">Insert code markdown</string>
     <string name="action_uncheck_all_tasks">Uncheck all items</string>
-    <string name="indicator_note_date">Created at %1$s\nLast modified at %2$s</string>
+    <string name="indicator_note_date">✍️ %1$s\n🔄 %2$s</string>
     <string name="indicator_restored_notes">Restored notes</string>
     <string name="indicator_restored_note">Restored note</string>
     <string name="indicator_archived_notes">Archived notes</string>
