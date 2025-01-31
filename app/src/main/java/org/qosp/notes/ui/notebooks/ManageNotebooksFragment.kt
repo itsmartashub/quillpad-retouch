@@ -14,7 +14,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import org.qosp.notes.R
+import org.qosp.notes.data.model.Notebook
 import org.qosp.notes.databinding.FragmentManageNotebooksBinding
+import org.qosp.notes.preferences.SortNavdrawerNotebooksMethod
+import org.qosp.notes.preferences.SortNavdrawerNotebooksMethod.*
+import org.qosp.notes.preferences.SortTagsMethod
 import org.qosp.notes.ui.common.BaseFragment
 import org.qosp.notes.ui.common.recycler.onBackPressedHandler
 import org.qosp.notes.ui.notebooks.dialog.EditNotebookDialog
@@ -30,6 +34,8 @@ import org.qosp.notes.ui.utils.views.BottomSheet
 class ManageNotebooksFragment : BaseFragment(R.layout.fragment_manage_notebooks) {
     private val binding by viewBinding(FragmentManageNotebooksBinding::bind)
 
+    protected var mainMenu: Menu? = null
+
     private val model: ManageNotebooksViewModel by viewModels()
     private lateinit var adapter: NotebooksRecyclerAdapter
 
@@ -43,9 +49,7 @@ class ManageNotebooksFragment : BaseFragment(R.layout.fragment_manage_notebooks)
 
         setupRecyclerView()
 
-        activityModel.notebooks.collect(viewLifecycleOwner) { (_, notebooks) ->
-            adapter.submitList(notebooks)
-        }
+        enlistNotebooks()
 
         binding.layoutAppBar.toolbarSelection.apply {
             inflateMenu(R.menu.manage_notebooks_selected)
@@ -63,13 +67,27 @@ class ManageNotebooksFragment : BaseFragment(R.layout.fragment_manage_notebooks)
     @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.manage_notebooks, menu)
+        mainMenu = menu
+        selectSortMethodItem()
     }
 
     @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_create_notebook -> EditNotebookDialog.build(null).show(childFragmentManager, null)
+            R.id.action_sort_navdrawer_notebook_created_asc -> activityModel.setSortNavdrawerNotebooksMethod(
+                CREATION_ASC
+            )
+
+            R.id.action_sort_navdrawer_notebook_created_desc -> activityModel.setSortNavdrawerNotebooksMethod(
+                CREATION_DESC
+            )
+
+            R.id.action_sort_navdrawer_notebook_name_asc -> activityModel.setSortNavdrawerNotebooksMethod(TITLE_ASC)
+            R.id.action_sort_navdrawer_notebook_name_desc -> activityModel.setSortNavdrawerNotebooksMethod(TITLE_DESC)
         }
+        enlistNotebooks()
+        selectSortMethodItem()
         return super.onOptionsItemSelected(item)
     }
 
@@ -144,5 +162,36 @@ class ManageNotebooksFragment : BaseFragment(R.layout.fragment_manage_notebooks)
             binding.layoutAppBar.appBar,
             requireContext().resources.getDimension(R.dimen.app_bar_elevation)
         )
+    }
+
+    private fun enlistNotebooks() {
+        // Get the current sort method preferences.
+        val sort = model.getSortNavdrawerNotebooksMethod()
+
+        activityModel.notebooks.collect(viewLifecycleOwner) { (_, notebooks) ->
+            // Apply sorting to the list of notebooks.
+            val sortedNotebooks: List<Notebook> = when (sort) {
+                TITLE_ASC.name -> notebooks.sortedBy { it.name }
+                TITLE_DESC.name -> notebooks.sortedByDescending { it.name }
+                CREATION_ASC.name -> notebooks.sortedBy { it.id }
+                CREATION_DESC.name -> notebooks.sortedByDescending { it.id }
+                else -> notebooks.sortedBy { it.name }
+            }
+
+            // Displaying the sorted list of notebooks in the view.
+            adapter.submitList(sortedNotebooks)
+        }
+    }
+
+    private fun selectSortMethodItem() {
+        mainMenu?.findItem(
+            when (model.getSortNavdrawerNotebooksMethod()) {
+                TITLE_ASC.name -> R.id.action_sort_navdrawer_notebook_name_asc
+                TITLE_DESC.name -> R.id.action_sort_navdrawer_notebook_name_desc
+                CREATION_ASC.name -> R.id.action_sort_navdrawer_notebook_created_asc
+                CREATION_DESC.name -> R.id.action_sort_navdrawer_notebook_created_desc
+                else -> R.id.action_sort_navdrawer_notebook_name_asc
+            }
+        )?.isChecked = true
     }
 }

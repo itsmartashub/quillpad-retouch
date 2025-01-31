@@ -18,11 +18,16 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 import org.qosp.notes.R
 import org.qosp.notes.components.backup.BackupService
 import org.qosp.notes.data.model.Notebook
 import org.qosp.notes.data.sync.core.SyncManager
 import org.qosp.notes.databinding.ActivityMainBinding
+import org.qosp.notes.preferences.SortNavdrawerNotebooksMethod
 import org.qosp.notes.ui.utils.closeAndThen
 import org.qosp.notes.ui.utils.collect
 import org.qosp.notes.ui.utils.hideKeyboard
@@ -210,7 +215,27 @@ class MainActivity : BaseActivity() {
 
     private fun setupNavigation() {
         fun createNotebookMenuItems(notebooks: List<Notebook>) {
-            notebooks.forEach { notebook ->
+
+            // Obtaining the current setting of notebook sorting order.
+            val sort = runBlocking {
+                return@runBlocking preferenceRepository
+                    .getAll()
+                    .map { it.sortNavdrawerNotebooksMethod }
+                    .first()
+                    .name
+            }
+
+            // Sorting the notebooks.
+            val sortedNotebooks: List<Notebook> = when (sort) {
+                SortNavdrawerNotebooksMethod.CREATION_ASC.name -> notebooks.sortedBy { it.id }
+                SortNavdrawerNotebooksMethod.CREATION_DESC.name -> notebooks.sortedByDescending { it.id }
+                SortNavdrawerNotebooksMethod.TITLE_ASC.name -> notebooks.sortedBy { it.name }
+                SortNavdrawerNotebooksMethod.TITLE_DESC.name -> notebooks.sortedByDescending { it.name }
+                else -> notebooks.sortedBy { it.name }
+            }
+
+            // Displaying the notebooks.
+            sortedNotebooks.forEach { notebook ->
                 val menuItem = notebooksMenu?.findItem(notebook.id.toInt())
                 if (menuItem != null && notebook.name != menuItem.title) {
                     menuItem.title = notebook.name

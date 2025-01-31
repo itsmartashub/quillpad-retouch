@@ -443,6 +443,11 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
                     true
                 }
 
+                R.id.action_remove_all_checked_tasks -> {
+                    removeAllCheckedTasks()
+                    true
+                }
+
                 else -> false
             }
         }
@@ -732,6 +737,10 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
         findItem(R.id.action_uncheck_all_tasks)?.apply {
             isVisible = note.isList && !note.isDeleted
         }
+
+        findItem(R.id.action_remove_all_checked_tasks)?.apply {
+            isVisible = note.isList && !note.isDeleted
+        }
     }
 
     private fun observeData() = with(binding) {
@@ -987,11 +996,11 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
         }
 
         actionAddTask.setOnClickListener {
-            var addTaskIndex = tasksAdapter.tasks.size;
+            var addTaskIndex = tasksAdapter.tasks.size
             if (model.moveCheckedItems)
-                addTaskIndex = tasksAdapter.tasks.indexOfLast { !it.isDone } + 1;
+                addTaskIndex = tasksAdapter.tasks.indexOfLast { !it.isDone } + 1
 
-            addTask(addTaskIndex);
+            addTask(addTaskIndex)
         }
     }
 
@@ -1210,6 +1219,15 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
     private fun uncheckAllTasks() {
         val updatedTasks = tasksAdapter.tasks.map { task ->
             task.copy(isDone = false)
+        }
+        tasksAdapter.submitList(updatedTasks)
+
+        model.updateTaskList(updatedTasks)
+    }
+
+    private fun removeAllCheckedTasks() {
+        val updatedTasks = tasksAdapter.tasks.filter { task ->
+            !task.isDone
         }
         tasksAdapter.submitList(updatedTasks)
 
