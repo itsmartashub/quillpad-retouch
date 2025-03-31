@@ -89,14 +89,41 @@ class NoteViewHolder(
         indicatorArchived.isVisible = note.isArchived && searchMode
     }
 
+
     private fun setTitle(note: Note) {
-        binding.textViewTitle.text = note.title.ifEmpty { context.getString(R.string.indicator_untitled) }
+        if (note.isCompactPreview) {
+            binding.textViewTitle.visibility = android.view.View.VISIBLE
+            binding.textViewTitle.text = note.title.ifEmpty { context.getString(R.string.indicator_untitled) }
+            return
+        }
+
+        if (note.title.isEmpty() && note.content.isNotEmpty()) {
+            binding.textViewTitle.visibility = android.view.View.GONE
+        } else {
+            binding.textViewTitle.visibility = android.view.View.VISIBLE
+            binding.textViewTitle.text = note.title
+        }
     }
 
     private fun setContent(note: Note) = with(binding) {
         recyclerTasks.isVisible = note.isList && note.taskList.isNotEmpty() && !note.isCompactPreview
         indicatorMoreTasks.isVisible = false
         textViewContent.isVisible = !note.isList && note.content.isNotEmpty() && !note.isCompactPreview
+
+        val showContent = !note.isCompactPreview && note.content.isNotEmpty() && !note.isList
+        textViewContent.isVisible = showContent
+
+        if (showContent) {
+            val marginTop = if (note.title.isEmpty()) {
+                0
+            } else {
+                context.resources.getDimensionPixelSize(R.dimen.card_note_title_content_gap)
+            }
+
+            (textViewContent.layoutParams as android.view.ViewGroup.MarginLayoutParams).apply {
+                topMargin = marginTop
+            }
+        }
 
         val taskList = note.taskList.takeIf { it.size <= 8 } ?: note.taskList.subList(0, 8).also {
             val moreItems = note.taskList.size - 8
