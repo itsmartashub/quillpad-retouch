@@ -857,7 +857,7 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
             notebookView.text = data.notebook?.name ?: getString(R.string.notebooks_unassigned)
 
             // Update fragment background colour
-            data.note.color.resId(requireContext())?.let { resId ->
+            data.note.color.resId(requireContext(), false)?.let { resId ->
                 backgroundColor = resId
                 root.setBackgroundColor(resId)
                 containerBottomToolbar.setBackgroundColor(resId)
