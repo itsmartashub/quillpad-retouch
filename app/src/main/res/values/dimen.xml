@@ -3,6 +3,7 @@
     <dimen name="recycler_padding">8dp</dimen>
     <dimen name="card_note_padding">12dp</dimen>
     <dimen name="card_note_icon_size">16dp</dimen>
+    <dimen name="card_note_corner_radius">16dp</dimen>
     <dimen name="card_note_title_content_gap">6dp</dimen>
     <dimen name="icon_indicator_empty_size">96dp</dimen>
     <dimen name="app_bar_elevation">0dp</dimen>
