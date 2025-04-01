@@ -59,6 +59,7 @@
     <style name="TextAppearance.Custom.NoteBody" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?attr/colorNoteText</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 <!--    <style name="NoteIcon">-->
@@ -81,6 +82,8 @@
         <item name="android:textColor">?attr/colorNoteText</item>
 <!--        <item name="android:textColor">?attr/colorSurface</item>-->
         <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/inter_font_family</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:background">@drawable/background_note_tag</item>
         <item name="android:paddingTop">4dp</item>
         <item name="android:paddingBottom">4dp</item>
