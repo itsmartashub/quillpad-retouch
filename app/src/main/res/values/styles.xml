@@ -69,10 +69,6 @@
         <item name="android:tint">?attr/colorPrimary</item>
     </style>
 
-    <style name="BottomToolbarIcon">
-        <item name="android:tint">?attr/colorSecondary</item>
-    </style>
-
     <!--
         colorSecondary with colorSurface TagChip textColor (background_note_tag.xml <solid>)
         colorDrawerHeaderBackground with colorNoteText TagChip textColor -->
@@ -81,8 +77,8 @@
         <item name="android:maxLines">1</item>
         <item name="android:textColor">?attr/colorNoteText</item>
 <!--        <item name="android:textColor">?attr/colorSurface</item>-->
+<!--        <item name="android:textColor">?attr/colorOnPrimary</item>-->
         <item name="android:textSize">13sp</item>
-        <item name="android:fontFamily">@font/inter_font_family</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@drawable/background_note_tag</item>
         <item name="android:paddingTop">4dp</item>
