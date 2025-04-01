@@ -5,6 +5,12 @@
             app:fontStyle="normal"
             app:fontWeight="400"
             app:font="@font/inter_regular"/>
+
+<!--    <font-->
+<!--        app:fontStyle="normal"-->
+<!--        app:fontWeight="500"-->
+<!--        app:font="@font/inter_medium"/>-->
+
     <font
             app:fontStyle="normal"
             app:fontWeight="700"

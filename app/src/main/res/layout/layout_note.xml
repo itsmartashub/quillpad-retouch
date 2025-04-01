@@ -102,10 +102,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/card_note_padding"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="0dp"
                 android:visibility="gone"
                 android:maxLines="7"
-                android:lineSpacingMultiplier="1.15"/>
+                android:lineSpacingMultiplier="1.1"
+                android:alpha="0.75"/>
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_tasks"
@@ -114,7 +115,8 @@
                 android:layout_marginHorizontal="@dimen/card_note_padding"
                 android:layout_marginTop="6dp"
                 android:nestedScrollingEnabled="false"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                android:alpha="0.75"/>
 
         <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/indicator_more_tasks"
