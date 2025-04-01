@@ -111,6 +111,8 @@ enum class FontSize(
     DEFAULT(R.string.preferences_font_size_default, -1) { override val isDefault = true }, // uses predefined/default MaterialComponents.Body1 font size
     TEN(R.string.preferences_font_size_ten, 10),
     FIFTEEN(R.string.preferences_font_size_fifteen, 15),
+    SEVENTEEN(R.string.preferences_font_size_seventeen, 17),
+    EIGHTEEN(R.string.preferences_font_size_eighteen, 18),
     TWENTY(R.string.preferences_font_size_twenty, 20),
     TWENTYFIVE(R.string.preferences_font_size_twentyfive, 25),
     THIRTY(R.string.preferences_font_size_thirty, 30),

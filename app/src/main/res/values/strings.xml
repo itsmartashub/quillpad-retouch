@@ -57,6 +57,8 @@
     <string name="preferences_font_size_default">Default</string>
     <string name="preferences_font_size_ten" translatable="false">10</string>
     <string name="preferences_font_size_fifteen" translatable="false">15</string>
+    <string name="preferences_font_size_seventeen" translatable="false">17</string>
+    <string name="preferences_font_size_eighteen" translatable="false">18</string>
     <string name="preferences_font_size_twenty" translatable="false">20</string>
     <string name="preferences_font_size_twentyfive" translatable="false">25</string>
     <string name="preferences_font_size_thirty" translatable="false">30</string>
