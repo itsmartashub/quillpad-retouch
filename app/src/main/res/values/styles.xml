@@ -68,6 +68,10 @@
         <item name="android:tint">?attr/colorPrimary</item>
     </style>
 
+    <style name="BottomToolbarIcon">
+        <item name="android:tint">?attr/colorSecondary</item>
+    </style>
+
     <!--
         colorSecondary with colorSurface TagChip textColor (background_note_tag.xml <solid>)
         colorDrawerHeaderBackground with colorNoteText TagChip textColor -->
