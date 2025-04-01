@@ -5,13 +5,14 @@
                 android:shape="rectangle">
             <!--
                 colorSecondary with colorSurface TagChip textColor (styles.xml)
-                colorDrawerHeaderBackground with colorNoteText TagChip textColor -->
+                colorDrawerHeaderBackground with colorNoteText TagChip textColor
+                colorPrimaryTranscluent with colorNoteText -->
 <!--            <solid android:color="?attr/colorSecondary"/> &lt;!&ndash; Background color&ndash;&gt;-->
-            <solid android:color="?attr/colorDrawerHeaderBackground"/> <!-- Background color -->
+            <solid android:color="?attr/colorPrimaryTranscluent"/> <!-- Background color -->
 
 <!--            <stroke-->
 <!--                    android:width="1dp"-->
-<!--                    android:color="?attr/colorPrimary"/>&lt;!&ndash; Border from "colorOutline" to "colorPrimary" &ndash;&gt;-->
+<!--                    android:color="?attr/colorDrawerHeaderBackground"/>&lt;!&ndash; Border from "colorOutline" to "colorPrimary" &ndash;&gt;-->
             <corners
                     android:radius="24dp"/>
         </shape>

@@ -106,7 +106,7 @@
                 android:visibility="gone"
                 android:maxLines="7"
                 android:lineSpacingMultiplier="1.1"
-                android:alpha="0.75"/>
+                android:alpha="0.7"/>
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_tasks"
@@ -116,7 +116,7 @@
                 android:layout_marginTop="6dp"
                 android:nestedScrollingEnabled="false"
                 android:visibility="gone"
-                android:alpha="0.75"/>
+                android:alpha="0.7"/>
 
         <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/indicator_more_tasks"
