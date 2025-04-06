@@ -7,6 +7,12 @@
     <attr name="colorTextOverlay" format="color"/>
     <attr name="colorHighlightMask" format="color"/>
 
+    <!-- MY CUSTOM MATERIALS -->
+    <attr name="colorSecondaryContainer" format="color"/>
+    <attr name="colorOnSecondaryContainer" format="color"/>
+    <attr name="colorSurfaceDim" format="color"/>
+    <attr name="colorSurfaceContainerLow" format="color"/>
+
     <!-- Navigation drawer -->
     <attr name="colorDrawerBackground" format="color"/>
     <attr name="colorDrawerHeaderBackground" format="color"/>

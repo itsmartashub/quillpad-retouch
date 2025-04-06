@@ -10,6 +10,8 @@
 
         <item name="colorBottomAppBarBackground">#FFFFFF</item>
 
+
+
         <item name="android:navigationBarColor">
             @android:color/transparent
         </item>
@@ -55,23 +57,27 @@
 
     <style name="DarkBlack">
         <item name="colorBackground">#000000</item>
-        <item name="colorSurface">#111114</item>
+        <item name="colorSurface">?attr/colorSurfaceDim</item>
         <item name="elevationOverlayEnabled">false</item>
         <item name="colorNoteDefault">#000000</item>
-        <item name="colorNoteListDefault">#111114</item>
-        <item name="colorDrawerBackground">#111114</item>
+        <item name="colorNoteListDefault">?attr/colorSurfaceDim</item>
+        <item name="colorDrawerBackground">?attr/colorSurfaceDim</item>
         <item name="colorBottomAppBarBackground">#000000</item>
 <!--        <item name="android:navigationBarColor">#090909</item>-->
         <item name="android:navigationBarColor">
             @android:color/transparent
         </item>
-
     </style>
 
     <style name="Blue">
         <item name="colorPrimary">#552196F3</item>
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorSecondary">#2196f3</item>
+
+        <item name="colorSecondaryContainer">#B5E2F8</item>
+        <item name="colorOnSecondaryContainer">#001E30</item>
+        <item name="colorSurfaceContainerLow">#EEF8FF</item>
+        <item name="colorNoteListDefault">#EEF8FF</item>
 
         <item name="colorDrawerHeaderBackground">#992196F3</item>
         <item name="colorPrimaryTranscluent">#332196F3</item>
@@ -83,15 +89,24 @@
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorSecondary">#7CB342</item>
 
+        <item name="colorSecondaryContainer">#D7F9AA</item>
+        <item name="colorOnSecondaryContainer">#122007</item>
+        <item name="colorSurfaceContainerLow">#F1F8EB</item>
+        <item name="colorNoteListDefault">#F1F8EB</item>
+
         <item name="colorDrawerHeaderBackground">#997CB342</item>
         <item name="colorPrimaryTranscluent">#337CB342</item>
-
     </style>
 
     <style name="Pink">
         <item name="colorPrimary">#C2185B</item>
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorSecondary">#C2185B</item>
+
+        <item name="colorSecondaryContainer">#FBC7D3</item>
+        <item name="colorOnSecondaryContainer">#3E001D</item>
+        <item name="colorSurfaceContainerLow">#FFF1F5</item>
+        <item name="colorNoteListDefault">#FFF1F5</item>
 
         <item name="colorDrawerHeaderBackground">#80C2185B</item>
         <item name="colorPrimaryTranscluent">#29C2185B</item>
@@ -103,6 +118,11 @@
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorSecondary">#FFB300</item>
 
+        <item name="colorSecondaryContainer">#FCE392</item>
+        <item name="colorOnSecondaryContainer">#261900</item>
+        <item name="colorSurfaceContainerLow">#FFF7EA</item>
+        <item name="colorNoteListDefault">#FFF7EA</item>
+
         <item name="colorDrawerHeaderBackground">#99FFB300</item>
         <item name="colorPrimaryTranscluent">#29E39F00</item>
 
@@ -112,6 +132,11 @@
         <item name="colorPrimary">#8249E8</item>
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorSecondary">#673AB7</item>
+
+        <item name="colorSecondaryContainer">#DDCBF8</item>
+        <item name="colorOnSecondaryContainer">#1A0046</item>
+        <item name="colorSurfaceContainerLow">#F3EEFA</item>
+        <item name="colorNoteListDefault">#F3EEFA</item>
 
         <item name="colorDrawerHeaderBackground">#99673AB7</item>
         <item name="colorPrimaryTranscluent">#29673AB7</item>
