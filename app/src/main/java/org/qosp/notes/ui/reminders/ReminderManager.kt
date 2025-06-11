@@ -5,7 +5,6 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import androidx.core.app.AlarmManagerCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
@@ -15,13 +14,17 @@ import kotlinx.coroutines.flow.first
 import org.qosp.notes.App
 import org.qosp.notes.R
 import org.qosp.notes.data.repo.ReminderRepository
+import org.qosp.notes.data.repo.NoteRepository
+import org.qosp.notes.ui.MainActivity
+
 
 class ReminderManager(
     private val context: Context,
     private val reminderRepository: ReminderRepository,
+    private val noteRepository: NoteRepository,
 ) {
     private fun requestBroadcast(reminderId: Long, noteId: Long, flag: Int = PendingIntent.FLAG_UPDATE_CURRENT): PendingIntent? {
-        val defaultFlag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
+        val defaultFlag = PendingIntent.FLAG_IMMUTABLE
 
         val notificationIntent = Intent(context, ReminderReceiver::class.java).apply {
             putExtras(
@@ -41,7 +44,7 @@ class ReminderManager(
     }
 
     fun isReminderSet(reminderId: Long, noteId: Long): Boolean {
-        val defaultFlag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
+        val defaultFlag = PendingIntent.FLAG_IMMUTABLE
         return requestBroadcast(reminderId, noteId, PendingIntent.FLAG_NO_CREATE or defaultFlag) != null
     }
 
@@ -60,7 +63,7 @@ class ReminderManager(
 
     fun cancel(reminderId: Long, noteId: Long, keepIntent: Boolean = false) {
         val alarmManager = ContextCompat.getSystemService(context, AlarmManager::class.java) ?: return
-        val defaultFlag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
+        val defaultFlag = PendingIntent.FLAG_IMMUTABLE
         val broadcast = requestBroadcast(reminderId, noteId, PendingIntent.FLAG_NO_CREATE or defaultFlag) ?: return
         alarmManager.cancel(broadcast)
         if (!keepIntent) broadcast.cancel()
@@ -92,6 +95,10 @@ class ReminderManager(
         reminderRepository.getById(reminderId).first()?.let { notificationTitle = it.name }
         reminderRepository.deleteById(reminderId)
 
+        if (notificationTitle.isEmpty()) {
+            noteRepository.getById(noteId).first()?.let { notificationTitle = it.title }
+        }
+
         val pendingIntent = NavDeepLinkBuilder(context)
             .setGraph(R.navigation.nav_graph)
             .setDestination(R.id.fragment_editor)
@@ -101,6 +108,7 @@ class ReminderManager(
                     "transitionName" to ""
                 )
             )
+            .setComponentName(MainActivity::class.java)
             .createPendingIntent()
 
         val notification = NotificationCompat.Builder(context, App.REMINDERS_CHANNEL_ID)

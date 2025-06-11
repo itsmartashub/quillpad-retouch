@@ -19,10 +19,13 @@ android {
         applicationId = "io.github.quillpad"
         minSdk = 24
         targetSdk = 35
-        versionCode = 32
-        versionName = "1.4.25"
+        versionCode = project.getVersionCode()
+        versionName = project.getVersionName()
 
         testInstrumentationRunner = "org.qosp.notes.TestRunner"
+
+        // Enable per-app language preferences
+        resourceConfigurations.addAll(listOf("ar", "ca", "cs", "de", "el", "en", "es", "fr", "it", "nb-rNO", "nl", "pl", "pt-rBR", "ru", "tr", "uk", "vi", "zh-rCN", "zh-rTW"))
 
         // export schema
         // https://stackoverflow.com/a/44645943/4594587
@@ -54,6 +57,11 @@ android {
     }
 
     buildTypes {
+        val testLabBuild = project.findProperty("TESTLAB_BUILD")?.toString() ?: "false"
+
+        debug {
+            buildConfigField("boolean", "TESTLAB_BUILD", testLabBuild)
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
@@ -65,18 +73,7 @@ android {
             ndk {
                 debugSymbolLevel = "FULL"
             }
-        }
-    }
-
-    flavorDimensions += "versions"
-    productFlavors {
-        create("googleFlavor") {
-            dimension = "versions"
-            buildConfigField("boolean", "IS_GOOGLE", "true")
-        }
-        create("defaultFlavor") {
-            dimension = "versions"
-            buildConfigField("boolean", "IS_GOOGLE", "false")
+            buildConfigField("boolean", "TESTLAB_BUILD", testLabBuild)
         }
     }
 
@@ -93,6 +90,7 @@ android {
     buildFeatures {
         viewBinding = true
         compose = true
+        buildConfig = true
     }
 
     kapt {

@@ -12,6 +12,8 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
+import androidx.core.view.get
+import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkBuilder
@@ -75,6 +77,14 @@ class MainActivity : BaseActivity() {
         // androidx.fragment:1.3.3 caused the FragmentContainerView to apply padding to itself when
         // the attribute fitsSystemWindows is enabled. We override it here and let the fragments decide their padding
         ViewCompat.setOnApplyWindowInsetsListener(binding.navHostFragment) { view, insets ->
+            insets
+        }
+
+        // Apply insets to the NavigationView to prevent it from overlapping with the status bar
+        // This is to fix the insets after Android 15 enforcing edge-to-edge display
+        ViewCompat.setOnApplyWindowInsetsListener(binding.navigationView) { view, insets ->
+            // Reduce padding but keep it below the status bar
+            view.setPadding(0, 0, 0, 0)
             insets
         }
 
@@ -295,8 +305,8 @@ class MainActivity : BaseActivity() {
             (primaryDestinations + secondaryDestinations + notebookIds).let { dests ->
                 notebooksMenu?.let { nbMenu ->
                     var index = 0
-                    while (index < nbMenu.size()) {
-                        val item = nbMenu.getItem(index)
+                    while (index < nbMenu.size) {
+                        val item = nbMenu[index]
                         if (item.itemId !in dests) nbMenu.removeItem(item.itemId) else index++
                     }
                 }
