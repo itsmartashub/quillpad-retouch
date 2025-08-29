@@ -273,8 +273,8 @@ abstract class AbstractNotesFragment(@LayoutRes resId: Int) : BaseFragment(resId
 
     @CallSuper
     open fun onDataChanged(data: Data) {
-        this.data = data
         val previousLayoutMode = this.data.layoutMode
+        this.data = data
 
         // Submit the list to the adapter
         onNotesChanged(data.notes)
