@@ -37,6 +37,9 @@ import org.qosp.notes.ui.utils.TakePictureContract
 import org.qosp.notes.ui.utils.navigateSafely
 import org.qosp.notes.ui.utils.viewBinding
 
+import org.qosp.notes.ui.utils.scrollToLastSmooth
+import org.qosp.notes.ui.utils.setOverflowLongPressAction
+
 open class MainFragment : AbstractNotesFragment(R.layout.fragment_main) {
     private val binding by viewBinding(FragmentMainBinding::bind)
 
@@ -114,6 +117,11 @@ open class MainFragment : AbstractNotesFragment(R.layout.fragment_main) {
         setHiddenNotesItemActionText()
         setLayoutChangeActionIcon()
         selectSortMethodItem()
+
+        // Long-press on overflow (three-dots) to scroll to bottom
+        binding.layoutAppBar.toolbar.setOverflowLongPressAction {
+            binding.recyclerMain.scrollToLastSmooth()
+        }
     }
 
     @Deprecated("Deprecated in Java")
