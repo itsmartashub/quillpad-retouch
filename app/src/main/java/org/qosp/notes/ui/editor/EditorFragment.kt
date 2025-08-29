@@ -107,6 +107,10 @@ import org.qosp.notes.ui.utils.shareAttachment
 import org.qosp.notes.ui.utils.shareNote
 import org.qosp.notes.ui.utils.viewBinding
 import org.qosp.notes.ui.utils.views.BottomSheet
+
+import org.qosp.notes.ui.utils.scrollToBottomSmooth
+import org.qosp.notes.ui.utils.setOverflowLongPressAction
+
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -353,6 +357,11 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
 
         lifecycleScope.launch {
             model.data.first().note?.let { setupMenuItems(it, it.reminders.isNotEmpty()) }
+        }
+
+        // Add long-press on overflow (three-dots) to scroll to bottom
+        binding.toolbar.setOverflowLongPressAction {
+            binding.scrollView.scrollToBottomSmooth()
         }
     }
 
