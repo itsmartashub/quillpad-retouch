@@ -207,6 +207,12 @@ open class MainFragment : AbstractNotesFragment(R.layout.fragment_main) {
     private fun setupFab() {
         ViewCompat.setTransitionName(binding.fabCreateNote, "editor_create")
         binding.fabCreateNote.setOnClickListener { goToEditor(sharedElement = binding.fabCreateNote) }
+
+        // Hold FAB to sroll on top
+        binding.fabCreateNote.setOnLongClickListener {
+            recyclerView.smoothScrollToPosition(0)
+            true
+        }
     }
 
     private fun setLayoutChangeActionIcon() {

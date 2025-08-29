@@ -339,6 +339,7 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
             if (model.inEditMode) requestFocusForFields(true) else view.hideKeyboard()
         }
 
+        // Hold FAB to sroll on top
         binding.fabChangeMode.setOnLongClickListener {
             binding.scrollView.smoothScrollTo(0, 0)
             true
