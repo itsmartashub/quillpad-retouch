@@ -274,15 +274,24 @@ abstract class AbstractNotesFragment(@LayoutRes resId: Int) : BaseFragment(resId
     @CallSuper
     open fun onDataChanged(data: Data) {
         this.data = data
+        val previousLayoutMode = this.data.layoutMode
 
         // Submit the list to the adapter
         onNotesChanged(data.notes)
 
-        // Update recycler layout and note order
-        recyclerView.layoutManager = when (data.layoutMode) {
-            LayoutMode.LIST -> LinearLayoutManager(requireContext())
-            LayoutMode.GRID -> StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+//        // Update recycler layout and note order
+//        recyclerView.layoutManager = when (data.layoutMode) {
+//            LayoutMode.LIST -> LinearLayoutManager(requireContext())
+//            LayoutMode.GRID -> StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+//        }
+        // Only update recycler layout when layout mode actually changes, or when it's not set yet (initial render)
+        if (previousLayoutMode != data.layoutMode || recyclerView.layoutManager == null) {
+            recyclerView.layoutManager = when (data.layoutMode) {
+                LayoutMode.LIST -> LinearLayoutManager(requireContext())
+                LayoutMode.GRID -> StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            }
         }
+
         onLayoutModeChanged()
         onSortMethodChanged()
     }
