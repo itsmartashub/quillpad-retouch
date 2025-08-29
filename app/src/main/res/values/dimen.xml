@@ -7,4 +7,7 @@
     <dimen name="card_note_title_content_gap">6dp</dimen>
     <dimen name="icon_indicator_empty_size">96dp</dimen>
     <dimen name="app_bar_elevation">0dp</dimen>
+
+    <!-- Overlay wrapper for icons (pin/reminder/deleted/hidden) badge padding -->
+    <dimen name="sticky_overlay_icons_padding">4dp</dimen>
 </resources>

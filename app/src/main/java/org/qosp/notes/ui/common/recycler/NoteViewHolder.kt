@@ -87,6 +87,13 @@ class NoteViewHolder(
         indicatorHasReminder.isVisible = hasReminders
         indicatorDeleted.isVisible = note.isDeleted && searchMode
         indicatorArchived.isVisible = note.isArchived && searchMode
+
+        // Show container only if at least one overlay icon is visible
+        overlayIndicatorContainer.isVisible = indicatorNoteHidden.isVisible ||
+            indicatorPinned.isVisible ||
+            indicatorHasReminder.isVisible ||
+            indicatorDeleted.isVisible ||
+            indicatorArchived.isVisible
     }
 
 
