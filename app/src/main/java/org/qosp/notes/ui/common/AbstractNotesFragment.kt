@@ -294,6 +294,9 @@ abstract class AbstractNotesFragment(@LayoutRes resId: Int) : BaseFragment(resId
 
         onLayoutModeChanged()
         onSortMethodChanged()
+
+        // Update toolbar title to reflect current note count
+        updateToolbarTitle()
     }
 
     open fun onNotesChanged(notes: List<Note>) {

@@ -89,7 +89,7 @@ open class MainFragment : AbstractNotesFragment(R.layout.fragment_main) {
     override val toolbar: Toolbar
         get() = binding.layoutAppBar.toolbar
     override val toolbarTitle: String
-        get() = getString(R.string.nav_notes)
+        get() = "${data.notes.size} ${getString(R.string.nav_notes)}"
     override val secondaryToolbar: Toolbar
         get() = binding.layoutAppBar.toolbarSelection
     override val secondaryToolbarMenuRes: Int = R.menu.main_selected_notes

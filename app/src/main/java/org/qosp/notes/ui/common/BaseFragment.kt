@@ -58,4 +58,8 @@ open class BaseFragment(@LayoutRes resId: Int) : Fragment(resId) {
     protected fun sendMessage(message: String) {
         setFragmentResult(FRAGMENT_MESSAGE, bundleOf(FRAGMENT_MESSAGE to message))
     }
+
+    protected fun updateToolbarTitle() {
+        (activity as? MainActivity)?.supportActionBar?.title = toolbarTitle
+    }
 }
