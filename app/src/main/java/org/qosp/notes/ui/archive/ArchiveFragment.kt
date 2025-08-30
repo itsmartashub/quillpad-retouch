@@ -37,7 +37,7 @@ class ArchiveFragment : AbstractNotesFragment(R.layout.fragment_archive) {
     override val toolbar: Toolbar
         get() = binding.layoutAppBar.toolbar
     override val toolbarTitle: String
-        get() = getString(R.string.nav_archive)
+        get() = "${data.notes.size} ${getString(R.string.nav_archive)}"
     override val secondaryToolbar: Toolbar
         get() = binding.layoutAppBar.toolbarSelection
     override val secondaryToolbarMenuRes: Int = R.menu.archive_selected_notes
