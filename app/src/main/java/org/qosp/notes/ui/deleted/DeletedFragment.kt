@@ -39,7 +39,7 @@ class DeletedFragment : AbstractNotesFragment(R.layout.fragment_deleted) {
     override val toolbar: Toolbar
         get() = binding.layoutAppBar.toolbar
     override val toolbarTitle: String
-        get() = getString(R.string.nav_deleted)
+        get() = "${data.notes.size} ${getString(R.string.nav_deleted)}"
     override val secondaryToolbar: Toolbar
         get() = binding.layoutAppBar.toolbarSelection
     override val secondaryToolbarMenuRes = R.menu.deleted_selected_notes
