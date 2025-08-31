@@ -10,4 +10,9 @@
 
     <!-- Overlay wrapper for icons (pin/reminder/deleted/hidden) badge padding -->
     <dimen name="sticky_overlay_icons_padding">4dp</dimen>
+
+    <!-- Swipe action dimensions -->
+    <dimen name="swipe_icon_size">32dp</dimen>
+    <dimen name="swipe_icon_margin">8dp</dimen>
+    <dimen name="swipe_text_size">16sp</dimen>
 </resources>

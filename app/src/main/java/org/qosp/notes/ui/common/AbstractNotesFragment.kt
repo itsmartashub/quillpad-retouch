@@ -44,6 +44,9 @@ import org.qosp.notes.ui.utils.collect
 import org.qosp.notes.ui.utils.liftAppBarOnScroll
 import org.qosp.notes.ui.utils.shareNote
 import org.qosp.notes.ui.utils.views.BottomSheet
+import org.qosp.notes.ui.common.swipe.SwipeHelper
+import org.qosp.notes.ui.common.swipe.SwipeAction
+import androidx.recyclerview.widget.ItemTouchHelper
 import java.util.concurrent.TimeUnit
 
 private typealias Data = AbstractNotesViewModel.Data
@@ -76,6 +79,10 @@ abstract class AbstractNotesFragment(@LayoutRes resId: Int) : BaseFragment(resId
             activityModel.showHiddenNotes = value
             recyclerAdapter.showHiddenNotes = value
         }
+
+    // Swipe gesture handling
+    private lateinit var swipeHelper: SwipeHelper
+    private lateinit var itemTouchHelper: ItemTouchHelper
 
     val markwon: Markwon by inject()
 
@@ -208,6 +215,9 @@ abstract class AbstractNotesFragment(@LayoutRes resId: Int) : BaseFragment(resId
             })
         }
 
+        // Setup swipe gestures
+        setupSwipeGestures()
+
         // Lift app bar during scrolling
         appBarLayout?.let {
             recyclerView.liftAppBarOnScroll(
@@ -263,6 +273,9 @@ abstract class AbstractNotesFragment(@LayoutRes resId: Int) : BaseFragment(resId
         recyclerAdapter.listener = null
 
         mainMenu = null
+
+        // Clean up swipe gesture resources
+        itemTouchHelper.attachToRecyclerView(null)
 
         snackbar?.dismiss()
         snackbar?.anchorView = null
@@ -447,6 +460,58 @@ abstract class AbstractNotesFragment(@LayoutRes resId: Int) : BaseFragment(resId
         }
         reenterTransition = MaterialElevationScale(true).apply {
             duration = 300L
+        }
+    }
+
+  // Sets up swipe gestures for the recycler view
+  // Sets up swipe gestures for the recycler view
+  private fun setupSwipeGestures() {
+      swipeHelper = SwipeHelper(
+          context = requireContext(),
+          onSwipeAction = { position, action ->
+              handleSwipeAction(position, action)
+          },
+          getNoteAtPosition = { position ->
+              recyclerAdapter.currentList.getOrNull(position)
+          }
+      )
+
+      itemTouchHelper = swipeHelper.createItemTouchHelper()
+      itemTouchHelper.attachToRecyclerView(recyclerView)
+  }
+
+    // Handles swipe actions by delegating to appropriate methods
+    private fun handleSwipeAction(position: Int, action: SwipeAction) {
+        if (position == RecyclerView.NO_POSITION || position >= recyclerAdapter.currentList.size) return
+
+        val note = recyclerAdapter.getItemAtPosition(position) ?: return
+
+        when (action) {
+            SwipeAction.PIN -> {
+                activityModel.pinNotes(note)
+                sendMessage(getString(R.string.action_pin))
+                recyclerView.post { recyclerAdapter.notifyItemChanged(position) }
+            }
+            SwipeAction.UNPIN -> {
+                activityModel.pinNotes(note)
+                sendMessage(getString(R.string.action_unpin))
+                recyclerView.post { recyclerAdapter.notifyItemChanged(position) }
+            }
+            SwipeAction.DELETE -> {
+                activityModel.deleteNotes(note)
+                if (data.noteDeletionTimeInDays == 0L) {
+                    sendMessage(getString(R.string.indicator_deleted_note_permanently))
+                    recyclerView.post { recyclerAdapter.notifyItemRemoved(position) }
+                } else {
+                    sendMessage(getString(R.string.indicator_moved_note_to_bin))
+                    recyclerView.post { recyclerAdapter.notifyItemChanged(position) }
+                }
+            }
+            SwipeAction.RESTORE -> {
+                activityModel.restoreNotes(note)
+                sendMessage(getString(R.string.indicator_restored_note))
+                recyclerView.post { recyclerAdapter.notifyItemChanged(position) }
+            }
         }
     }
 
