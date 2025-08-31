@@ -3,4 +3,9 @@
     <color name="navBarDark">#202020</color>
     <color name="navBarLight">#F5F5F5</color>
     <color name="navBarBlack">#0d0d0d</color>
+
+    <!-- Swipe action colors -->
+    <color name="delete_color">#AD4444</color>
+    <color name="restore_color">#319B66</color>
+    <color name="pin_color">#AB6209</color>
 </resources>
