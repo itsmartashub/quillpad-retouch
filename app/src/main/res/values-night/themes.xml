@@ -40,7 +40,6 @@
         <item name="colorHighlightMask">#1FFFFFFF</item>
 
         <item name="colorNoteDefault">?attr/colorSurface</item>
-<!--        <item name="colorNoteListDefault">#242127</item>-->
         <item name="colorNoteGreen">#38573A</item>
         <item name="colorNotePink">#5C2940</item>
         <item name="colorNoteBlue">#273749</item>
@@ -48,7 +47,7 @@
         <item name="colorNoteOrange">#65452A</item>
         <item name="colorNoteYellow">#68643A</item>
 
-        <item name="colorNoteTextHighlight">#96FFFF00</item>
+        <item name="colorNoteTextHighlight">#D7C374</item>
 
         <item name="popupTheme">@style/Widget.Custom.PopupMenu</item>
         <item name="materialAlertDialogTheme">@style/DialogTheme</item>
