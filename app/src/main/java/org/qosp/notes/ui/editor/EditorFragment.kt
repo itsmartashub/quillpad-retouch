@@ -102,6 +102,7 @@ import org.qosp.notes.ui.utils.liftAppBarOnScroll
 import org.qosp.notes.ui.utils.navigateSafely
 import org.qosp.notes.ui.utils.requestFocusAndKeyboard
 import org.qosp.notes.ui.utils.resId
+import org.qosp.notes.ui.utils.resIdForEditor
 import org.qosp.notes.ui.utils.resolveAttribute
 import org.qosp.notes.ui.utils.shareAttachment
 import org.qosp.notes.ui.utils.shareNote
@@ -890,7 +891,7 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
             notebookView.text = data.notebook?.name ?: getString(R.string.notebooks_unassigned)
 
             // Update fragment background colour
-            data.note.color.resId(requireContext(), false)?.let { resId ->
+            data.note.color.resIdForEditor(requireContext())?.let { resId ->
                 backgroundColor = resId
                 root.setBackgroundColor(resId)
                 containerBottomToolbar.setBackgroundColor(resId)

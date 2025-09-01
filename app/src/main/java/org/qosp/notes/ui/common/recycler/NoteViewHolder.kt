@@ -57,7 +57,7 @@ class NoteViewHolder(
     }
 
     private fun updateBackgroundColor(color: NoteColor) {
-        color.resId(context, true)?.let { resId ->
+        color.resId(context)?.let { resId ->
             binding.root.setCardBackgroundColor(resId)
             binding.linearLayout.setBackgroundColor(resId)
         }

@@ -40,7 +40,6 @@
         <item name="colorHighlightMask">#1FFFFFFF</item>
 
         <item name="colorNoteDefault">?attr/colorSurface</item>
-<!--        <item name="colorNoteListDefault">#242127</item>-->
         <item name="colorNoteGreen">#38573A</item>
         <item name="colorNotePink">#5C2940</item>
         <item name="colorNoteBlue">#273749</item>
@@ -48,7 +47,7 @@
         <item name="colorNoteOrange">#65452A</item>
         <item name="colorNoteYellow">#68643A</item>
 
-        <item name="colorNoteTextHighlight">#96FFFF00</item>
+        <item name="colorNoteTextHighlight">#D7C374</item>
 
         <item name="popupTheme">@style/Widget.Custom.PopupMenu</item>
         <item name="materialAlertDialogTheme">@style/DialogTheme</item>
@@ -67,7 +66,7 @@
         <item name="colorOnSecondaryContainer">#D8EDFF</item>
         <item name="colorSurfaceContainerLow">#1E2734</item>
         <item name="colorSurfaceDim">#162030</item>
-        <item name="colorNoteListDefault">#1E2734</item>
+        <item name="colorNoteDefault">#1E2734</item>
 
         <item name="colorDrawerHeaderBackground">#3390CAF9</item>
         <item name="colorPrimaryTranscluent">#2690CAF9</item>
@@ -83,7 +82,7 @@
         <item name="colorOnSecondaryContainer">#E4F5D3</item>
         <item name="colorSurfaceContainerLow">#202A18</item>
         <item name="colorSurfaceDim">#182214</item>
-        <item name="colorNoteListDefault">#202A18</item>
+        <item name="colorNoteDefault">#202A18</item>
 
         <item name="colorDrawerHeaderBackground">#33C5E1A5</item>
         <item name="colorPrimaryTranscluent">#26C5E1A5</item>
@@ -99,7 +98,7 @@
         <item name="colorOnSecondaryContainer">#FFD9E2</item>
         <item name="colorSurfaceContainerLow">#321B25</item>
         <item name="colorSurfaceDim">#28141E</item>
-        <item name="colorNoteListDefault">#321B25</item>
+        <item name="colorNoteDefault">#321B25</item>
 
         <item name="colorDrawerHeaderBackground">#33F48FB1</item>
         <item name="colorPrimaryTranscluent">#26F48FB1</item>
@@ -115,7 +114,7 @@
         <item name="colorOnSecondaryContainer">#FFECD2</item>
         <item name="colorSurfaceContainerLow">#2D2318</item>
         <item name="colorSurfaceDim">#251C12</item>
-        <item name="colorNoteListDefault">#2D2318</item>
+        <item name="colorNoteDefault">#2D2318</item>
 
         <item name="colorDrawerHeaderBackground">#33FFCC80</item>
         <item name="colorPrimaryTranscluent">#26FFCC80</item>
@@ -131,7 +130,7 @@
         <item name="colorOnSecondaryContainer">#E9DDFF</item>
         <item name="colorSurfaceContainerLow">#26203A</item>
         <item name="colorSurfaceDim">#1E1A30</item>
-        <item name="colorNoteListDefault">#26203A</item>
+        <item name="colorNoteDefault">#26203A</item>
 
         <item name="colorDrawerHeaderBackground">#33B39DDB</item>
         <item name="colorPrimaryTranscluent">#26B39DDB</item>
