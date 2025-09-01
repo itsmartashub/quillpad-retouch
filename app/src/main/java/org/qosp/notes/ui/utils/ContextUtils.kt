@@ -31,3 +31,16 @@ fun NoteColor.resId(context: Context): Int? {
 
     return context.resolveAttribute(resId)
 }
+
+fun NoteColor.resIdForEditor(context: Context): Int? {
+    // For AMOLED theme in editor mode, use black for default color
+    if (this == NoteColor.Default) {
+        // Check if AMOLED theme in one call instead of separate function
+        val backgroundColor = context.resolveAttribute(R.attr.colorBackground)
+        if (backgroundColor == android.graphics.Color.BLACK) {
+            return android.graphics.Color.BLACK
+        }
+    }
+
+    return resId(context)
+}

@@ -59,8 +59,9 @@
         <item name="colorBackground">#000000</item>
         <item name="colorSurface">?attr/colorSurfaceDim</item>
         <item name="elevationOverlayEnabled">false</item>
-        <item name="colorNoteDefault">#000000</item>
-        <item name="colorNoteListDefault">?attr/colorSurfaceDim</item>
+        <!--<item name="colorNoteDefault">#000000</item>-->
+        <item name="colorNoteDefault">?attr/colorSurfaceDim</item>
+        <!--<item name="colorNoteListDefault">?attr/colorSurfaceDim</item>-->
         <item name="colorDrawerBackground">?attr/colorSurfaceDim</item>
         <item name="colorBottomAppBarBackground">#000000</item>
 <!--        <item name="android:navigationBarColor">#090909</item>-->
@@ -77,7 +78,7 @@
         <item name="colorSecondaryContainer">#B5E2F8</item>
         <item name="colorOnSecondaryContainer">#001E30</item>
         <item name="colorSurfaceContainerLow">#EEF8FF</item>
-        <item name="colorNoteListDefault">#EEF8FF</item>
+        <item name="colorNoteDefault">#EEF8FF</item>
 
         <item name="colorDrawerHeaderBackground">#992196F3</item>
         <item name="colorPrimaryTranscluent">#332196F3</item>
@@ -92,7 +93,7 @@
         <item name="colorSecondaryContainer">#D7F9AA</item>
         <item name="colorOnSecondaryContainer">#122007</item>
         <item name="colorSurfaceContainerLow">#F1F8EB</item>
-        <item name="colorNoteListDefault">#F1F8EB</item>
+        <item name="colorNoteDefault">#F1F8EB</item>
 
         <item name="colorDrawerHeaderBackground">#997CB342</item>
         <item name="colorPrimaryTranscluent">#337CB342</item>
@@ -106,7 +107,7 @@
         <item name="colorSecondaryContainer">#FBC7D3</item>
         <item name="colorOnSecondaryContainer">#3E001D</item>
         <item name="colorSurfaceContainerLow">#FFF1F5</item>
-        <item name="colorNoteListDefault">#FFF1F5</item>
+        <item name="colorNoteDefault">#FFF1F5</item>
 
         <item name="colorDrawerHeaderBackground">#80C2185B</item>
         <item name="colorPrimaryTranscluent">#29C2185B</item>
@@ -121,7 +122,7 @@
         <item name="colorSecondaryContainer">#FCE392</item>
         <item name="colorOnSecondaryContainer">#261900</item>
         <item name="colorSurfaceContainerLow">#FFF7EA</item>
-        <item name="colorNoteListDefault">#FFF7EA</item>
+        <item name="colorNoteDefault">#FFF7EA</item>
 
         <item name="colorDrawerHeaderBackground">#99FFB300</item>
         <item name="colorPrimaryTranscluent">#29E39F00</item>
@@ -136,7 +137,7 @@
         <item name="colorSecondaryContainer">#DDCBF8</item>
         <item name="colorOnSecondaryContainer">#1A0046</item>
         <item name="colorSurfaceContainerLow">#F3EEFA</item>
-        <item name="colorNoteListDefault">#F3EEFA</item>
+        <item name="colorNoteDefault">#F3EEFA</item>
 
         <item name="colorDrawerHeaderBackground">#99673AB7</item>
         <item name="colorPrimaryTranscluent">#29673AB7</item>

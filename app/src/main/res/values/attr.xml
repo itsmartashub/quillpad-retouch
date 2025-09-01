@@ -30,7 +30,6 @@
     <attr name="colorAttachmentIndicator" format="color"/>
 
     <attr name="colorNoteDefault" format="color"/>
-    <attr name="colorNoteListDefault" format="color"/>
     <attr name="colorNoteGreen" format="color"/>
     <attr name="colorNotePink" format="color"/>
     <attr name="colorNoteBlue" format="color"/>
