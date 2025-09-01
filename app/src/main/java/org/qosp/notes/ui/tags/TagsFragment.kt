@@ -115,9 +115,9 @@ class TagsFragment : BaseFragment(R.layout.fragment_tags) {
                 when (sort) {
                     SortTagsMethod.CREATION_ASC.name -> it.sortedBy { it.tag.id }
                     SortTagsMethod.CREATION_DESC.name -> it.sortedByDescending { it.tag.id }
-                    SortTagsMethod.TITLE_ASC.name -> it.sortedBy { it.tag.name }
-                    SortTagsMethod.TITLE_DESC.name -> it.sortedByDescending { it.tag.name }
-                    else -> it.sortedBy { it.tag.name }
+                    SortTagsMethod.TITLE_ASC.name -> it.sortedBy { it.tag.name.lowercase() }
+                    SortTagsMethod.TITLE_DESC.name -> it.sortedByDescending { it.tag.name.lowercase() }
+                    else -> it.sortedBy { it.tag.name.lowercase() }
                 }
             }
 
