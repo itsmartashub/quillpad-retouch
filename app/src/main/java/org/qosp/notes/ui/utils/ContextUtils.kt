@@ -18,7 +18,7 @@ fun Context.getDimensionAttribute(attr: Int): Int? {
     return resolveAttribute(attr)?.let { TypedValue.complexToDimensionPixelSize(it, resources.displayMetrics) }
 }
 
-fun NoteColor.resId(context: Context, isInListView: Boolean = false): Int? {
+fun NoteColor.resId(context: Context): Int? {
     val resId = when (this) {
         NoteColor.Green -> R.attr.colorNoteGreen
         NoteColor.Pink -> R.attr.colorNotePink
@@ -26,7 +26,7 @@ fun NoteColor.resId(context: Context, isInListView: Boolean = false): Int? {
         NoteColor.Red -> R.attr.colorNoteRed
         NoteColor.Orange -> R.attr.colorNoteOrange
         NoteColor.Yellow -> R.attr.colorNoteYellow
-        else -> if (isInListView) R.attr.colorNoteListDefault else R.attr.colorNoteDefault
+        else -> R.attr.colorNoteDefault
     }
 
     return context.resolveAttribute(resId)
