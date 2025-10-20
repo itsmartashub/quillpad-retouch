@@ -105,12 +105,16 @@ class NoteRepositoryImpl(
                         } else {
                             localNote.copy(id = action.note.id)
                         }
+                        idMappingDao.updateNoteExtras(
+                            localId = action.note.id,
+                            cloudService = syncProvider.type,
+                            extras = action.remoteNote.extra
+                        )
                         updateNote(note, sync = false)
                     }
 
                     is NoteAction.Delete -> {
-                        deleteNotes(action.note, sync = false)
-                        idMappingDao.deleteByLocalId(action.note.id)
+                        moveNotesToBin(action.note, sync = false)
                     }
                 }
             } catch (e: Exception) {
@@ -163,7 +167,7 @@ class NoteRepositoryImpl(
         }
     }
 
-    override suspend fun moveNotesToBin(vararg notes: Note) {
+    override suspend fun moveNotesToBin(vararg notes: Note, sync: Boolean) {
         Log.d(tag, "moveNotesToBin: Moving ${notes.size} notes to bin")
         val entities = notes.map { it.toEntity().copy(isDeleted = true, deletionDate = Instant.now().epochSecond) }
             .toTypedArray<NoteEntity>()
@@ -172,7 +176,7 @@ class NoteRepositoryImpl(
         reminderDao.deleteIfNoteIdIn(notes.map { it.id })
         cleanMappingsForLocalNotes(*notes)
         notes.filterNot { it.isLocalOnly }.forEach {
-            processRemoteActions(it.id, Delete(it))
+            if (sync) processRemoteActions(it.id, Delete(it))
         }
     }
 

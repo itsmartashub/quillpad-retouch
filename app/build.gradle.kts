@@ -14,16 +14,12 @@ android {
     compileSdk = 35
     namespace = "org.qosp.notes"
 
-    val currentVersionCode = project.getVersionCode()
-    val currentVersionName = project.getVersionName()
-    println("Version code: $currentVersionCode; Version name: $currentVersionName")
-
     defaultConfig {
         applicationId = "io.github.quillpad"
         minSdk = 24
         targetSdk = 35
-        versionCode = currentVersionCode
-        versionName = currentVersionName
+        versionCode = 49
+        versionName = "1.5.7"
 
         testInstrumentationRunner = "org.qosp.notes.TestRunner"
 
@@ -212,7 +208,9 @@ dependencies {
     implementation(libs.koin.android.compat)
     implementation(libs.koin.androidx.workmanager)
     implementation(libs.koin.androidx.navigation)
-    implementation(libs.koin.androidx.startup)
+
+    // Yaml parsing
+    implementation(libs.yamlkt)
 
     // Coil
     implementation(libs.coil)
@@ -232,6 +230,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit2Convertor)
 
-    // LeakCanary
+    // Software Quality
     debugImplementation(libs.leakcanaryAndroid)
+    implementation(libs.bundles.acra)
 }

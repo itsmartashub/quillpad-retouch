@@ -58,6 +58,7 @@ import io.noties.markwon.editor.MarkwonEditorTextWatcher
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.commonmark.node.Code
+import org.qosp.notes.preferences.DefaultEditorMode
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.qosp.notes.R
@@ -112,6 +113,7 @@ import org.qosp.notes.ui.utils.views.BottomSheet
 import org.qosp.notes.ui.utils.scrollToBottomSmooth
 import org.qosp.notes.ui.utils.setOverflowLongPressAction
 
+import org.qosp.notes.ui.widget.WidgetUpdateHelper
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -324,12 +326,12 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
             requireContext().resources.getDimension(R.dimen.app_bar_elevation)
         )
 
-        setFragmentResultListener(RECORD_CODE) { s, bundle ->
+        setFragmentResultListener(RECORD_CODE) { _, bundle ->
             val attachment = bundle.getParcelable<Attachment>(RECORDED_ATTACHMENT) ?: return@setFragmentResultListener
             model.insertAttachments(attachment)
         }
 
-        setFragmentResultListener(MARKDOWN_DIALOG_RESULT) { s, bundle ->
+        setFragmentResultListener(MARKDOWN_DIALOG_RESULT) { _, bundle ->
             val markdown = bundle.getString(MARKDOWN_DIALOG_RESULT) ?: return@setFragmentResultListener
             binding.editTextContent.apply {
                 if (selectedText?.isNotEmpty() == true) {
@@ -409,6 +411,8 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
 
                 R.id.action_pin_note -> {
                     activityModel.pinNotes(note)
+                    // Refresh widgets to reflect pin state change
+                    WidgetUpdateHelper.updateAllWidgets(requireContext())
                 }
 
                 R.id.action_change_mode -> {
@@ -613,7 +617,7 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
             imeOptions = EditorInfo.IME_ACTION_NEXT
             setRawInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
 
-            setOnEditorActionListener { v, actionId, event ->
+            setOnEditorActionListener { _, actionId, _ ->
                 when {
                     actionId == EditorInfo.IME_ACTION_NEXT && data.note?.isList == true -> {
                         jumpToNextTaskOrAdd(-1)
@@ -624,7 +628,7 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
                 }
             }
 
-            doOnTextChanged { text, start, before, count ->
+            doOnTextChanged { text, _, _, _ ->
                 // Only listen for meaningful changes
                 if (data.note == null) {
                     return@doOnTextChanged
@@ -702,7 +706,7 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
         }
 
         // Used to clear focus and hide the keyboard when touching outside of the edit texts
-        linearLayout.setOnFocusChangeListener { v, hasFocus ->
+        linearLayout.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) root.hideKeyboard()
         }
     }
@@ -806,6 +810,10 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
             // Update Title and Content only the first the since they are EditTexts
             if (isFirstLoad) {
 
+                if (data.defaultEditorMode == DefaultEditorMode.EDIT) {
+                    model.inEditMode = true
+                }
+
                 // apply font size preference
                 if (data.editorFontSize != -1) { // is customised
                     val fontSizeFloat = data.editorFontSize.toFloat()
@@ -840,7 +848,7 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
                     }
                 }
 
-                nextTaskId = data.note.taskList.map { it.id }.maxOrNull()?.plus(1) ?: 0L
+                nextTaskId = data.note.taskList.maxOfOrNull { it.id }?.plus(1) ?: 0L
             }
 
             // We only want to update the task list when the user converts the note from text to list
@@ -924,7 +932,7 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
             if (isNoteDeleted) {
                 snackbar = Snackbar.make(binding.root, "", Snackbar.LENGTH_INDEFINITE)
                     .setText(getString(R.string.indicator_deleted_note_cannot_be_edited))
-                    .setAction(getString(R.string.action_restore)) { view ->
+                    .setAction(getString(R.string.action_restore)) { _ ->
                         activityModel.restoreNotes(data.note)
                         activity?.onBackPressed()
                     }
@@ -1161,16 +1169,16 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
     }
 
     private fun showColorChangeDialog() {
-        val selected = NoteColor.values().indexOf(data.note?.color).coerceAtLeast(0)
+        val selected = NoteColor.entries.indexOf(data.note?.color).coerceAtLeast(0)
         val dialog = BaseDialog.build(requireContext()) {
             setTitle(getString(R.string.action_change_color))
             setSingleChoiceItems(
-                NoteColor.values().map { it.localizedName }.toTypedArray(),
+                NoteColor.entries.map { it.localizedName }.toTypedArray(),
                 selected
-            ) { dialog, which ->
-                model.setColor(NoteColor.values()[which])
+            ) { _, which ->
+                model.setColor(NoteColor.entries[which])
             }
-            setPositiveButton(getString(R.string.action_done)) { dialog, which -> }
+            setPositiveButton(getString(R.string.action_done)) { _, _ -> }
         }
 
         dialog.show()
@@ -1209,7 +1217,7 @@ class EditorFragment : BaseFragment(R.layout.fragment_editor) {
 
     /** Gives the focus to the note body if it is empty */
     private fun requestFocusForFields(forceFocus: Boolean = false) = with(binding) {
-        if (editTextContent.text.isNullOrEmpty() || forceFocus) {
+        if (data.note?.isEmpty() == true || forceFocus) {
             editTextContent.requestFocusAndKeyboard()
         }
     }

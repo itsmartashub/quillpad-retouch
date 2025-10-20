@@ -9,6 +9,7 @@ on:
 
 jobs:
   build:
+    if: github.repository == 'quillpad/quillpad'
     runs-on: ubuntu-latest
 
     steps:
@@ -70,6 +71,13 @@ jobs:
         name: Google PlayStore Bundle
         path: app/build/outputs/bundle/release/app-release.aab
 
+    - name: Archive ProGuard Mapping
+      if: ${{ github.ref_type == 'tag' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: ProGuard Mapping File
+        path: app/build/outputs/mapping/release/mapping.txt
+
     - name: Rename app to release version
       if: ${{ github.ref_type == 'tag' }}
       env: 
@@ -87,7 +95,7 @@ jobs:
         draft: true
 
   test_lab:
-    if: github.ref == 'refs/heads/master'
+    if: github.repository == 'quillpad/quillpad' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
 
     steps:
