@@ -113,11 +113,21 @@ class NoteViewHolder(
     }
 
     private fun setTitle(note: Note) {
-        if (note.title.isEmpty()) {
-            binding.textViewTitle.isVisible = false
-        } else {
-            binding.textViewTitle.isVisible = true
-            binding.textViewTitle.text = note.title
+        when {
+            note.title.isNotEmpty() -> {
+                binding.textViewTitle.isVisible = true
+                binding.textViewTitle.text = note.title
+                binding.textViewTitle.alpha = 1f
+            }
+            note.isCompactPreview -> {
+                binding.textViewTitle.isVisible = true
+                binding.textViewTitle.setText(R.string.indicator_untitled)
+                binding.textViewTitle.alpha = 0.4f
+            }
+            else -> {
+                binding.textViewTitle.isVisible = false
+                binding.textViewTitle.alpha = 1f
+            }
         }
     }
 
